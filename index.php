@@ -12,9 +12,6 @@
   <li> <a href="index.php">Home </a> </li>
    <li> <a href="menu.php">Menu </a>  </li>
    <li> <a href="location.php" > Location </a> </li>
-
-    
-   <li> <a href="https://docs.google.com/a/csumb.edu/document/d/15Y2a8pX6osQWlWS9bxPRVzYsgM_ioskDdpTHeaWm_MQ/edit?usp=sharing">Our Story</a> </li>
 </ul>
     
     <h2>Thank you for visiting our site! Take a look at our handmade products in the Menu section</h2>
