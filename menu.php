@@ -1,3 +1,4 @@
+
 <?php
 
 include '../includes/dbConnection.php';
@@ -150,7 +151,7 @@ include '../includes/dbConnection.php';
         
         echo "</table>";
         echo "</form>";
-
+}
       function getSandwich()
     {
         global $dbConn;
