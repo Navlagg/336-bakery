@@ -49,8 +49,13 @@ include '../includes/dbConnection.php';
         $sql = "SELECT * FROM
             Bread ORDER BY bread";
         
-        if (isset($_GET['nameSort']))
-            $sql = "SELECT * FROM Bread ORDER BY bread";
+        if (isset($_GET['nameSort'])){
+            if($_GET['nameSort'] == "ascending"){
+                $sql = "SELECT * FROM Bread ORDER BY bread ASC";
+            } else {
+                $sql = "SELECT * FROM Bread ORDER BY bread DESC";
+            }
+        }
             
         if (isset($_GET['sort']))
             $sql = "SELECT * FROM Bread ORDER BY price";
@@ -90,8 +95,13 @@ include '../includes/dbConnection.php';
                 FROM pastries
                 ORDER BY name";
                 
-        if (isset($_GET['nameSort']))
-            $sql = "SELECT * FROM pastries ORDER BY name";
+        if (isset($_GET['nameSort'])){
+            if($_GET['nameSort'] == "ascending"){
+                $sql = "SELECT * FROM pastries ORDER BY name ASC";
+            } else {
+                $sql = "SELECT * FROM pastries ORDER BY name DESC";
+            }
+        }
         
         if (isset($_GET['sort']))
             $sql = "SELECT * FROM pastries ORDER BY price";
@@ -127,8 +137,13 @@ include '../includes/dbConnection.php';
                 FROM drinks
                 ORDER BY name";
                 
-        if (isset($_GET['nameSort']))
-            $sql = "SELECT * FROM drinks ORDER BY name";
+        if (isset($_GET['nameSort'])){
+            if($_GET['nameSort'] == "ascending"){
+                $sql = "SELECT * FROM drinks ORDER BY name ASC";
+            } else {
+                $sql = "SELECT * FROM drinks ORDER BY name DESC";
+            }
+        }
         
         if (isset($_GET['sort']))
             $sql = "SELECT * FROM drinks ORDER BY price";
@@ -160,8 +175,13 @@ include '../includes/dbConnection.php';
                 FROM sandwich
                 ORDER BY name";
                 
-        if (isset($_GET['nameSort']))
-            $sql = "SELECT * FROM sandwich ORDER BY name";
+        if (isset($_GET['nameSort'])){
+            if($_GET['nameSort'] == "ascending"){
+                $sql = "SELECT * FROM sandwich ORDER BY name ASC";
+            } else {
+                $sql = "SELECT * FROM sandwich ORDER BY name DESC";
+            }
+        }
           
         
         if (isset($_GET['sort']))
@@ -200,8 +220,13 @@ include '../includes/dbConnection.php';
                 FROM vegetarian
                 ORDER BY name";
         
-        if (isset($_GET['nameSort']))
-            $sql = "SELECT * FROM vegetarian ORDER BY name";
+        if (isset($_GET['nameSort'])){
+            if($_GET['nameSort'] == "ascending"){
+                $sql = "SELECT * FROM vegetarian ORDER BY name ASC";
+            } else {
+                $sql = "SELECT * FROM vegetarian ORDER BY name DESC";
+            }
+        }
          
          
         if (isset($_GET['sort']))
@@ -262,7 +287,8 @@ include '../includes/dbConnection.php';
             </select>
             
             </br>
-           Order Alphebetically: <input type="checkbox" name="nameSort">
+           Order Alphebetically: <input type="radio" name="nameSort" value="ascending">
+           Order Reverse Alphebetically: <input type="radio" name="nameSort" value="descending">
             </br>
             Order by price: <input type="checkbox" name="sort">
             </br>
