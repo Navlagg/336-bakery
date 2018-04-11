@@ -1,9 +1,12 @@
 <?php
 
 include '../includes/dbConnection.php';
-
-    session_start();
     
+    session_start();
+    if(!isset($_SESSION["cart"]))
+    {
+     $_SESSION["cart"]= array();
+    }
     $dbConn = getDatabaseConnection('bakery');
     
     
@@ -55,9 +58,9 @@ include '../includes/dbConnection.php';
         $statement->execute();
         $pan = $statement->fetchAll(PDO::FETCH_ASSOC);
         
-       echo "<form action='action.php'>";
+       
 
-        echo "<form>";
+        echo "<form >";
         echo "<table align='center'>";
         
         echo "<tr><td> </td>" . "<td>Item</td>" . "<td> Price </td>" . "<td> Image </td></tr>" ;
@@ -65,14 +68,14 @@ include '../includes/dbConnection.php';
         
         foreach ($pan as $bread)
         {
-            echo "<tr><td>". "<input type='checkbox' name='cartt[]'   value =" . $bread['bread'] . "> </td>" ;
+            echo "<tr><td>". "<input type='submit' name='cartt'   value =" . $bread['bread'] . "> </td>" ;
             echo "<td>" .$bread['bread']. "</td> <td>" .$bread['price']. "</td><td><img src='img/bread/".$bread['bread'].".jpg'/></td></tr>";
         }
         
         echo "</table>";
         echo "</form>";
         
-        echo "</forms>";
+        
         
 
         
@@ -96,7 +99,7 @@ include '../includes/dbConnection.php';
         $statement->execute();
         $records = $statement->fetchAll(PDO::FETCH_ASSOC);
         
-        echo "<form>";
+        echo "<form >";
         echo "<table align='center'>";
         
                 echo "<tr><td> </td>" . "<td>Item</td>" . "<td> Price </td>" . "<td> Image </td></tr>" ;
@@ -104,7 +107,7 @@ include '../includes/dbConnection.php';
 
         foreach ($records as $record)
         {
-            echo "<tr><td>". "<input type='checkbox' name='cartt[]'  value =" . $record['name'] . "> </td>" ;
+            echo "<tr><td>". "<input type='submit' name='cartt'  value =" . $record['name'] . "> </td>" ;
             echo "<td>" .$record['name']. "</td><td>" .$record['price']. "</td><td><img src='img/pastries/".$record['name'].".jpg'/></td></tr>";
         }
         
@@ -141,14 +144,88 @@ include '../includes/dbConnection.php';
         
         foreach ($records as $record)
         {
-            echo "<tr><td>". "<input type='checkbox' name='cartt[]'   value =" . $record['name'] . "> </td>" ;
+            echo "<tr><td>". "<input type='submit' name='cartt' value ='".$record['name']."'> </td>" ;
             echo "<td>" .$record['name']. "</td><td>" .$record['price']. "</td><td><img src='img/drinks/".$record['name'].".jpg'/></td></tr>";
         }
         
         echo "</table>";
         echo "</form>";
 
-      
+      function getSandwich()
+    {
+        global $dbConn;
+        
+        $sql = "SELECT * 
+                FROM sandwich
+                ORDER BY name";
+                
+        if (isset($_GET['nameSort']))
+            $sql = "SELECT * FROM sandwich ORDER BY name";
+          
+        
+        if (isset($_GET['sort']))
+            $sql = "SELECT * FROM sandwich ORDER BY price";   
+            
+        $statement = $dbConn->prepare($sql);
+        $statement->execute();
+        $records = $statement->fetchAll(PDO::FETCH_ASSOC);
+        
+        echo "<form>";
+        echo "<table align='center'>";
+        
+                echo "<tr><td> </td>" . "<td>Item</td>" . "<td> Price </td>" . "<td> Image </td></tr>" ;
+
+
+        foreach ($records as $record)
+        {
+            echo "<tr><td>". "<input type='checkbox' name='cartt[]'   value =" . $record['name'] . "> </td>" ;
+            echo "<td>" .$record['name']. "</td><td>" .$record['price']. "</td><td><img src='img/sanwiches/".$record['name'].".jpg'/></td></tr>";
+        }
+        
+        echo "</table>";
+        echo "</form>";
+        
+        foreach($records as $record) {
+          echo "<input type='checkbox' name='cartt[]'    value =" . $record['name'] . ">";
+          echo $record['name'] . " - ". $record['price'] . "<br/> ";
+      }
+    }
+    
+        function getVegetarian()
+    {
+        global $dbConn;
+        
+        $sql = "SELECT * 
+                FROM vegetarian
+                ORDER BY name";
+        
+        if (isset($_GET['nameSort']))
+            $sql = "SELECT * FROM vegetarian ORDER BY name";
+         
+         
+        if (isset($_GET['sort']))
+            $sql = "SELECT * FROM vegetarian ORDER BY price";    
+            
+        $statement = $dbConn->prepare($sql);
+        $statement->execute();
+        $records = $statement->fetchAll(PDO::FETCH_ASSOC);
+        
+        echo "<form>";
+        echo "<table align='center'>";
+                echo "<tr><td> </td>" . "<td>Item</td>" . "<td> Price </td>" . "<td> Image </td></tr>" ;
+
+
+        foreach ($records as $record)
+        {
+            echo "<tr><td>". "<input type='checkbox' name='cartt[]'   value =" . $record['name'] . "> </td>" ;
+            echo "<td>" .$record['name']. "</td><td>" .$record['price']. "</td><td><img src='img/Vegetarian/".$record['name'].".jpg'/></td></tr>";
+        }
+        
+        echo "</table>";
+        echo "</form>";
+        
+
+    
     }
     
 ?>
@@ -196,11 +273,39 @@ include '../includes/dbConnection.php';
         </nav>
         
         
-        <form action="shoppingCart.php" >
-            <?=displayAll()?> 
-           <input type="submit" name= "addCart" value="Checkout">
+    <form>
+            <?php
+            displayAll();
+            if(isset($_GET["cartt"]))
+            {
+            array_push( $_SESSION["cart"],$_GET['cartt']);
+            }
+            
+            
+            //print_r($_SESSION["cart"]);
+            /*
+            if(isset($_GET['addCart']))
+            {
+                $list=$_POST['cartt'];
+                print_r($list);
+               foreach($_POST['cartt'] as $item)
+                {
+                array_push( $_SESSION["cart"],$item);
+                }
+            }
+            
+            */        if(isset($_GET['submitRequest']))
+            {
+            ?> 
+            
+           
+           
+           <?php
+           }
+           ?>
+           
          </form>  
-                
+              <a href ="scart.php">shopping cart</a>  
                 
     </body>
 </html>

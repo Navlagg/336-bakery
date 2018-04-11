@@ -19,8 +19,7 @@
     <img src="img/pic1.jpg" />
     
      <div style="visibility:hidden">
-    <audio autoplay loop>
-    <source src="audio/music.mp3" type="audio/mpeg"> </audio> 
+
     
     </br>
 
