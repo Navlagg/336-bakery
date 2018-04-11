@@ -1,7 +1,5 @@
-
 <?php
-
-include '../includes/dbConnection.php';
+include '../dbConnection.php';
     
     session_start();
     if(!isset($_SESSION["cart"]))
@@ -39,7 +37,6 @@ include '../includes/dbConnection.php';
       $records = $statement->fetchALL(PDO::FETCH_ASSOC);  
       
  
-
     }
     
     function getPanDulce()
@@ -65,12 +62,10 @@ include '../includes/dbConnection.php';
         $pan = $statement->fetchAll(PDO::FETCH_ASSOC);
         
        
-
         echo "<form >";
         echo "<table align='center'>";
         
         echo "<tr><td> </td>" . "<td>Item</td>" . "<td> Price </td>" . "<td> Image </td></tr>" ;
-
         
         foreach ($pan as $bread)
         {
@@ -83,7 +78,6 @@ include '../includes/dbConnection.php';
         
         
         
-
         
     }
     function getPastries()
@@ -114,8 +108,6 @@ include '../includes/dbConnection.php';
         echo "<table align='center'>";
         
                 echo "<tr><td> </td>" . "<td>Item</td>" . "<td> Price </td>" . "<td> Image </td></tr>" ;
-
-
         foreach ($records as $record)
         {
             echo "<tr><td>". "<input type='submit' name='cartt'  value =" . $record['name'] . "> </td>" ;
@@ -125,7 +117,6 @@ include '../includes/dbConnection.php';
         echo "</table>";
         echo "</form>";
         
-
         
     }
     
@@ -156,7 +147,6 @@ include '../includes/dbConnection.php';
         echo "<table align='center'>";
         
                 echo "<tr><td> </td>" . "<td>Item</td>" . "<td> Price </td>" . "<td> Image </td></tr>" ;
-
         
         foreach ($records as $record)
         {
@@ -195,8 +185,6 @@ include '../includes/dbConnection.php';
         echo "<table align='center'>";
         
                 echo "<tr><td> </td>" . "<td>Item</td>" . "<td> Price </td>" . "<td> Image </td></tr>" ;
-
-
         foreach ($records as $record)
         {
             echo "<tr><td>". "<input type='checkbox' name='cartt[]'   value =" . $record['name'] . "> </td>" ;
@@ -239,8 +227,6 @@ include '../includes/dbConnection.php';
         echo "<form>";
         echo "<table align='center'>";
                 echo "<tr><td> </td>" . "<td>Item</td>" . "<td> Price </td>" . "<td> Image </td></tr>" ;
-
-
         foreach ($records as $record)
         {
             echo "<tr><td>". "<input type='checkbox' name='cartt[]'   value =" . $record['name'] . "> </td>" ;
@@ -250,7 +236,6 @@ include '../includes/dbConnection.php';
         echo "</table>";
         echo "</form>";
         
-
     
     }
     
@@ -270,7 +255,7 @@ include '../includes/dbConnection.php';
 <ul class="topnav">
   <li> <a href="index.php">Home </a> </li>
    <li> <a href="menu.php">Menu </a>  </li>
-   
+       <li> <a href="trello.php">Trello </a>  </li>
 
 </ul>
     
